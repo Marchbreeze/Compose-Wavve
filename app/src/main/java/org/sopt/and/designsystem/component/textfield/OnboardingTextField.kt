@@ -40,7 +40,7 @@ fun OnboardingTextField(
             .fillMaxWidth()
             .clip(RoundedCornerShape(8.dp))
             .background(Color.DarkGray)
-            .padding(8.dp),
+            .padding(horizontal = 8.dp),
         value = value,
         singleLine = true,
         placeholder = {

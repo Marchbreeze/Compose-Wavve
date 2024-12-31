@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.sopt.and.designsystem.component.text.WhiteGrayText
+import org.sopt.and.designsystem.component.textfield.OnboardingTextField
 import org.sopt.and.designsystem.theme.ANDANDROIDTheme
 
 @Composable
@@ -54,6 +55,24 @@ fun SignUpScreen(
             fontSize = 20,
             whiteText = "Wavve를 즐길 수",
             grayText = "있어요!"
+        )
+        OnboardingTextField(
+            modifier = Modifier
+                .padding(top = 30.dp)
+                .padding(horizontal = 20.dp),
+            value = "",
+            placeholder = "wavve@example.com",
+            onValueChange = onIdChange,
+            isPassword = false,
+        )누
+        OnboardingTextField(
+            modifier = Modifier
+                .padding(top = 30.dp)
+                .padding(horizontal = 20.dp),
+            value = "",
+            placeholder = "Wavve 비밀번호 설정",
+            onValueChange = onIdChange,
+            isPassword = true,
         )
     }
 }
