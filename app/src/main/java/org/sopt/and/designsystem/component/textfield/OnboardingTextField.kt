@@ -2,6 +2,7 @@ package org.sopt.and.designsystem.component.textfield
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -18,10 +19,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import org.sopt.and.designsystem.theme.ANDANDROIDTheme
 
 @Composable
@@ -32,7 +35,6 @@ fun OnboardingTextField(
     onValueChange: (String) -> Unit,
     isPassword: Boolean = false,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    keyboardActions: KeyboardActions = KeyboardActions.Default,
 ) {
     var isPasswordVisible by remember { mutableStateOf(false) }
     val visualTransformation =
@@ -44,33 +46,43 @@ fun OnboardingTextField(
             .fillMaxWidth()
             .clip(RoundedCornerShape(8.dp))
             .background(Color.DarkGray)
-            .padding(horizontal = 8.dp),
+            .padding(horizontal = 10.dp),
         value = value,
-        singleLine = true,
+        textStyle = TextStyle(
+            color = Color.White,
+            fontSize = 16.sp,
+            lineHeight = 20.sp
+        ),
         placeholder = {
             Text(
                 text = placeholder,
-                color = Color.LightGray
+                color = Color.LightGray,
+                fontSize = 16.sp,
+                lineHeight = 20.sp
             )
         },
         trailingIcon = {
             if (isPassword) {
                 Text(
+                    modifier = Modifier.clickable(
+                        indication = null,
+                        interactionSource = remember { MutableInteractionSource() }
+                    ) {
+                        isPasswordVisible = !isPasswordVisible
+                    },
                     text = if (isPasswordVisible) "hide" else "show",
                     color = Color.White,
-                    modifier = Modifier.clickable { isPasswordVisible = !isPasswordVisible }
+                    fontSize = 16.sp,
                 )
             }
         },
+        singleLine = true,
         onValueChange = onValueChange,
         visualTransformation = visualTransformation,
         keyboardOptions = keyboardOptions,
-        keyboardActions = keyboardActions,
         colors = TextFieldDefaults.colors(
             focusedContainerColor = Color.DarkGray,
             unfocusedContainerColor = Color.DarkGray,
-            focusedTextColor = Color.White,
-            unfocusedTextColor = Color.White,
             cursorColor = Color.LightGray,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,

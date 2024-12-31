@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,6 +25,8 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -122,6 +125,10 @@ fun SignUpScreen(
             placeholder = "wavve@example.com",
             onValueChange = onIdChange,
             isPassword = false,
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Next,
+                keyboardType = KeyboardType.Email
+            )
         )
         Row(
             modifier = Modifier
@@ -137,8 +144,9 @@ fun SignUpScreen(
             Text(
                 modifier = Modifier.padding(horizontal = 10.dp),
                 text = "로그인 및 비밀번호 찾기에 사용되니, 정확한 이메일을 입력해주세요",
-                fontSize = 14.sp,
-                color = Color.Gray
+                fontSize = 12.sp,
+                color = Color.Gray,
+                lineHeight = 20.sp
             )
         }
 
@@ -165,8 +173,9 @@ fun SignUpScreen(
             Text(
                 modifier = Modifier.padding(horizontal = 10.dp),
                 text = "비밀번호는 8~20자 이내로 영문 대소문자, 숫자, 특수문자 중 3가지 이상 중복하여 입력해주세요.",
-                fontSize = 14.sp,
-                color = Color.Gray
+                fontSize = 12.sp,
+                color = Color.Gray,
+                lineHeight = 20.sp
             )
         }
 
