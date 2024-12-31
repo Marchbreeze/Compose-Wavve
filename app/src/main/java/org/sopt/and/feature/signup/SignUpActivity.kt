@@ -4,10 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.and.designsystem.theme.ANDANDROIDTheme
 
@@ -18,8 +15,15 @@ class SignUpActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ANDANDROIDTheme {
-                //SignUpScreen()
+                SignUpRoute(
+                    navigateToLogIn = ::navigateToLogin,
+                    modifier = Modifier
+                )
             }
         }
+    }
+
+    private fun navigateToLogin(id: String, password: String) {
+        // TODO
     }
 }
