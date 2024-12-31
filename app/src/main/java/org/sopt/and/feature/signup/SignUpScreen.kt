@@ -17,7 +17,7 @@ import org.sopt.and.designsystem.theme.ANDANDROIDTheme
 
 @Composable
 fun SignUpRoute(
-    navigateToSignIn: (String, String) -> Unit,
+    navigateToLogIn: (String, String) -> Unit,
     viewModel: SignUpViewModel = hiltViewModel(),
     modifier: Modifier = Modifier,
 ) {
@@ -26,9 +26,9 @@ fun SignUpRoute(
 
 @Composable
 fun SignUpScreen(
-    onSignUpButtonClick: () -> Unit,
+    onSignUpBtnClick: () -> Unit,
     onIdChange: (String) -> Unit,
-    onPasswordChange: (String) -> Unit,
+    onPwChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     signUpState: SignUpState,
 ) {
@@ -63,10 +63,10 @@ fun SignUpScreen(
 fun SignInPreview() {
     ANDANDROIDTheme {
         SignUpScreen(
-            onSignUpButtonClick = { },
+            onSignUpBtnClick = { },
             modifier = Modifier,
             onIdChange = { },
-            onPasswordChange = { },
+            onPwChange = { },
             signUpState = SignUpState()
         )
     }
