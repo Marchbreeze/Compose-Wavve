@@ -12,7 +12,6 @@ import org.sopt.and.designsystem.theme.ANDANDROIDTheme
 class SignUpActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
             ANDANDROIDTheme {
                 SignUpRoute(

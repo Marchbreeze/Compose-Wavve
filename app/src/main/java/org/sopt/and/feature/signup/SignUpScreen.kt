@@ -3,6 +3,8 @@ package org.sopt.and.feature.signup
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -14,10 +16,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -42,6 +47,7 @@ fun SignUpRoute(
 
     val lifecycleOwner = LocalLifecycleOwner.current
     val context = LocalContext.current
+    val focusManager = LocalFocusManager.current
 
     LaunchedEffect(viewModel.signUpSideEffect, lifecycleOwner) {
         viewModel.signUpSideEffect.flowWithLifecycle(lifecycleOwner.lifecycle)
@@ -63,7 +69,12 @@ fun SignUpRoute(
     }
 
     SignUpScreen(
-        modifier = modifier,
+        modifier = modifier
+            .pointerInput(Unit) {
+                detectTapGestures(onTap = {
+                    focusManager.clearFocus()
+                })
+            },
         onSignUpBtnClick = viewModel::postToSignUp,
         onIdChange = viewModel::updateId,
         onPwChange = viewModel::updatePassword,
@@ -133,7 +144,7 @@ fun SignUpScreen(
 
         OnboardingTextField(
             modifier = Modifier
-                .padding(top = 20.dp)
+                .padding(top = 30.dp)
                 .padding(horizontal = 20.dp),
             value = signUpState.password,
             placeholder = "Wavve 비밀번호 설정",
@@ -167,8 +178,13 @@ fun SignUpScreen(
             modifier = Modifier
                 .background(Color.Gray)
                 .fillMaxWidth()
-                .clickable { onSignUpBtnClick() }
-                .padding(vertical = 10.dp),
+                .padding(vertical = 10.dp)
+                .clickable(
+                    indication = null,
+                    interactionSource = remember { MutableInteractionSource() }
+                ) {
+                    onSignUpBtnClick()
+                },
             text = "Wavve 회원가입",
             fontSize = 16.sp,
             color = Color.White,

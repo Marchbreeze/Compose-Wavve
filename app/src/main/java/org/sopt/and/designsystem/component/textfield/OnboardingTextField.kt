@@ -5,6 +5,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -29,6 +31,8 @@ fun OnboardingTextField(
     placeholder: String = "",
     onValueChange: (String) -> Unit,
     isPassword: Boolean = false,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
 ) {
     var isPasswordVisible by remember { mutableStateOf(false) }
     val visualTransformation =
@@ -60,11 +64,16 @@ fun OnboardingTextField(
         },
         onValueChange = onValueChange,
         visualTransformation = visualTransformation,
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
         colors = TextFieldDefaults.colors(
             focusedContainerColor = Color.DarkGray,
             unfocusedContainerColor = Color.DarkGray,
             focusedTextColor = Color.White,
             unfocusedTextColor = Color.White,
+            cursorColor = Color.LightGray,
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
         ),
     )
 }
