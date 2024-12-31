@@ -1,17 +1,28 @@
 package org.sopt.and.feature.signup
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import org.sopt.and.R
 import org.sopt.and.designsystem.component.text.WhiteGrayText
 import org.sopt.and.designsystem.component.textfield.OnboardingTextField
 import org.sopt.and.designsystem.theme.ANDANDROIDTheme
@@ -27,10 +38,10 @@ fun SignUpRoute(
 
 @Composable
 fun SignUpScreen(
+    modifier: Modifier = Modifier,
     onSignUpBtnClick: () -> Unit,
     onIdChange: (String) -> Unit,
     onPwChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
     signUpState: SignUpState,
 ) {
     Column(
@@ -53,9 +64,10 @@ fun SignUpScreen(
                 start = 20.dp,
             ),
             fontSize = 20,
-            whiteText = "Wavve를 즐길 수",
+            whiteText = "Wavve를 즐길 수 ",
             grayText = "있어요!"
         )
+
         OnboardingTextField(
             modifier = Modifier
                 .padding(top = 30.dp)
@@ -64,26 +76,79 @@ fun SignUpScreen(
             placeholder = "wavve@example.com",
             onValueChange = onIdChange,
             isPassword = false,
-        )누
+        )
+        Row(
+            modifier = Modifier
+                .padding(top = 10.dp)
+                .padding(horizontal = 20.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_info),
+                contentDescription = "",
+                tint = Color.Gray
+            )
+            Text(
+                modifier = Modifier.padding(horizontal = 10.dp),
+                text = "로그인 및 비밀번호 찾기에 사용되니, 정확한 이메일을 입력해주세요",
+                fontSize = 14.sp,
+                color = Color.Gray
+            )
+        }
+
         OnboardingTextField(
             modifier = Modifier
-                .padding(top = 30.dp)
+                .padding(top = 20.dp)
                 .padding(horizontal = 20.dp),
             value = "",
             placeholder = "Wavve 비밀번호 설정",
-            onValueChange = onIdChange,
+            onValueChange = onPwChange,
             isPassword = true,
+        )
+        Row(
+            modifier = Modifier
+                .padding(top = 10.dp)
+                .padding(horizontal = 20.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_info),
+                contentDescription = "",
+                tint = Color.Gray
+            )
+            Text(
+                modifier = Modifier.padding(horizontal = 10.dp),
+                text = "비밀번호는 8~20자 이내로 영문 대소문자, 숫자, 특수문자 중 3가지 이상 중복하여 입력해주세요.",
+                fontSize = 14.sp,
+                color = Color.Gray
+            )
+        }
+
+        Spacer(
+            modifier = Modifier.weight(1f)
+        )
+
+        Text(
+            modifier = Modifier
+                .background(Color.Gray)
+                .fillMaxWidth()
+                .clickable { onSignUpBtnClick() }
+                .padding(vertical = 10.dp),
+            text = "Wavve 회원가입",
+            fontSize = 16.sp,
+            color = Color.White,
+            textAlign = TextAlign.Center,
         )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun SignInPreview() {
+fun SignUpPreview() {
     ANDANDROIDTheme {
         SignUpScreen(
-            onSignUpBtnClick = { },
             modifier = Modifier,
+            onSignUpBtnClick = { },
             onIdChange = { },
             onPwChange = { },
             signUpState = SignUpState()
