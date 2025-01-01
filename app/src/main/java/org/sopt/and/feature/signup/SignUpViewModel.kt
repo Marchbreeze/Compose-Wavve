@@ -18,7 +18,7 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
 
     private val _signUpSideEffect = MutableSharedFlow<SignUpSideEffect>()
     val signUpSideEffect = _signUpSideEffect.asSharedFlow()
-    
+
     fun updateId(id: String) = _signUpState.update { it.copy(id = id) }
 
     fun updatePassword(password: String) = _signUpState.update { it.copy(password = password) }

@@ -30,8 +30,8 @@ class SignUpActivity : ComponentActivity() {
                     }
                 ) { innerPadding ->
                     SignUpRoute(
+                        modifier = Modifier.padding(paddingValues = innerPadding),
                         navigateToLogIn = ::navigateToLogin,
-                        modifier = Modifier.padding(paddingValues = innerPadding)
                     )
                 }
             }

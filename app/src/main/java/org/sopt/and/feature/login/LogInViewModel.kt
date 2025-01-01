@@ -38,4 +38,17 @@ class LogInViewModel @Inject constructor() : ViewModel() {
         }
     }
 
+    fun navigateToSignUp() {
+        viewModelScope.launch {
+            _logInSideEffect.emit(LogInSideEffect.NavigateToSignUp)
+        }
+    }
+
+    fun navigateToMain() {
+        viewModelScope.launch {
+            _logInSideEffect.emit(LogInSideEffect.NavigateToMain)
+        }
+
+    }
+
 }

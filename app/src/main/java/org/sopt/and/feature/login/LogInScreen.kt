@@ -1,4 +1,4 @@
-package org.sopt.and.feature.signup
+package org.sopt.and.feature.login
 
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -6,13 +6,12 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Icon
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -24,7 +23,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -35,32 +33,35 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.flowWithLifecycle
-import org.sopt.and.R
-import org.sopt.and.designsystem.component.text.WhiteGrayText
 import org.sopt.and.designsystem.component.textfield.OnboardingTextField
 import org.sopt.and.designsystem.theme.ANDANDROIDTheme
 
 @Composable
-fun SignUpRoute(
+fun LogInRoute(
     modifier: Modifier = Modifier,
-    navigateToLogIn: (String, String) -> Unit,
-    viewModel: SignUpViewModel = hiltViewModel(),
+    navigateToSignUp: () -> Unit,
+    navigateToMain: (String) -> Unit,
+    viewModel: LogInViewModel = hiltViewModel(),
 ) {
-    val signUpState by viewModel.signUpState.collectAsStateWithLifecycle()
+    val logInState by viewModel.logInState.collectAsStateWithLifecycle()
 
     val lifecycleOwner = LocalLifecycleOwner.current
     val context = LocalContext.current
     val focusManager = LocalFocusManager.current
 
-    LaunchedEffect(viewModel.signUpSideEffect, lifecycleOwner) {
-        viewModel.signUpSideEffect.flowWithLifecycle(lifecycleOwner.lifecycle)
+    LaunchedEffect(viewModel.logInSideEffect, lifecycleOwner) {
+        viewModel.logInSideEffect.flowWithLifecycle(lifecycleOwner.lifecycle)
             .collect { sideEffect ->
                 when (sideEffect) {
-                    is SignUpSideEffect.NavigateToLogIn -> {
-                        navigateToLogIn(signUpState.id, signUpState.password)
+                    is LogInSideEffect.NavigateToSignUp -> {
+                        navigateToSignUp()
                     }
 
-                    is SignUpSideEffect.SignUpError -> {
+                    is LogInSideEffect.NavigateToMain -> {
+                        navigateToMain(logInState.id)
+                    }
+
+                    is LogInSideEffect.LogInError -> {
                         if (sideEffect.isIdError) {
                             Toast.makeText(context, "아이디를 확인해주세요", Toast.LENGTH_SHORT).show()
                         } else {
@@ -71,58 +72,43 @@ fun SignUpRoute(
             }
     }
 
-    SignUpScreen(
+    LogInScreen(
         modifier = modifier
             .pointerInput(Unit) {
                 detectTapGestures(onTap = {
                     focusManager.clearFocus()
                 })
             },
-        onSignUpBtnClick = viewModel::postToSignUp,
+        onLogInBtnClick = viewModel::postToLogIn,
+        onSignUpBtnClick = viewModel::navigateToSignUp,
+        onNextBtnClick = viewModel::navigateToMain,
         onIdChange = viewModel::updateId,
         onPwChange = viewModel::updatePassword,
-        signUpState = signUpState
+        logInState = logInState
     )
 }
 
 @Composable
-fun SignUpScreen(
+fun LogInScreen(
     modifier: Modifier = Modifier,
+    onLogInBtnClick: () -> Unit,
     onSignUpBtnClick: () -> Unit,
+    onNextBtnClick: () -> Unit,
     onIdChange: (String) -> Unit,
     onPwChange: (String) -> Unit,
-    signUpState: SignUpState,
+    logInState: LogInState,
 ) {
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(Color.Black),
     ) {
-        WhiteGrayText(
-            modifier = Modifier.padding(
-                top = 30.dp,
-                start = 20.dp,
-            ),
-            fontSize = 20,
-            whiteText = "이메일과 비밀번호",
-            grayText = "만으로"
-        )
-        WhiteGrayText(
-            modifier = Modifier.padding(
-                top = 4.dp,
-                start = 20.dp,
-            ),
-            fontSize = 20,
-            whiteText = "Wavve를 즐길 수 ",
-            grayText = "있어요!"
-        )
-
         OnboardingTextField(
             modifier = Modifier
-                .padding(top = 30.dp)
+                .padding(top = 100.dp)
                 .padding(horizontal = 20.dp),
-            value = signUpState.id,
-            placeholder = "wavve@example.com",
+            value = logInState.id,
+            placeholder = "이메일 주소",
             onValueChange = onIdChange,
             isPassword = false,
             keyboardOptions = KeyboardOptions(
@@ -130,72 +116,66 @@ fun SignUpScreen(
                 keyboardType = KeyboardType.Email
             )
         )
-        Row(
-            modifier = Modifier
-                .padding(top = 10.dp)
-                .padding(horizontal = 20.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_info),
-                contentDescription = "",
-                tint = Color.Gray
-            )
-            Text(
-                modifier = Modifier.padding(horizontal = 10.dp),
-                text = "로그인 및 비밀번호 찾기에 사용되니, 정확한 이메일을 입력해주세요",
-                fontSize = 12.sp,
-                color = Color.Gray,
-                lineHeight = 20.sp
-            )
-        }
 
         OnboardingTextField(
             modifier = Modifier
-                .padding(top = 30.dp)
+                .padding(top = 10.dp)
                 .padding(horizontal = 20.dp),
-            value = signUpState.password,
-            placeholder = "Wavve 비밀번호 설정",
+            value = logInState.password,
+            placeholder = "비밀번호",
             onValueChange = onPwChange,
             isPassword = true,
         )
-        Row(
+
+        Button(
             modifier = Modifier
-                .padding(top = 10.dp)
+                .fillMaxWidth()
+                .padding(top = 50.dp)
                 .padding(horizontal = 20.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_info),
-                contentDescription = "",
-                tint = Color.Gray
+            onClick = onLogInBtnClick,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.Blue,
+                contentColor = Color.White
             )
+        ) {
             Text(
-                modifier = Modifier.padding(horizontal = 10.dp),
-                text = "비밀번호는 8~20자 이내로 영문 대소문자, 숫자, 특수문자 중 3가지 이상 중복하여 입력해주세요.",
-                fontSize = 12.sp,
-                color = Color.Gray,
-                lineHeight = 20.sp
+                text = "로그인",
+                fontSize = 16.sp,
+                lineHeight = 30.sp
             )
         }
 
-        Spacer(
-            modifier = Modifier.weight(1f)
-        )
+        Button(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 10.dp)
+                .padding(horizontal = 20.dp),
+            onClick = onSignUpBtnClick,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.Gray,
+                contentColor = Color.Black
+            )
+        ) {
+            Text(
+                text = "회원가입",
+                fontSize = 16.sp,
+                lineHeight = 30.sp
+            )
+        }
 
         Text(
             modifier = Modifier
-                .background(Color.Gray)
                 .fillMaxWidth()
                 .padding(vertical = 14.dp)
+                .align(Alignment.CenterHorizontally)
                 .clickable(
                     indication = null,
                     interactionSource = remember { MutableInteractionSource() }
                 ) {
-                    onSignUpBtnClick()
+                    onNextBtnClick()
                 },
-            text = "Wavve 회원가입",
-            fontSize = 16.sp,
+            text = "다음에 하기",
+            fontSize = 12.sp,
             color = Color.White,
             textAlign = TextAlign.Center,
         )
@@ -204,14 +184,16 @@ fun SignUpScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun SignUpPreview() {
+fun LogInPreview() {
     ANDANDROIDTheme {
-        SignUpScreen(
+        LogInScreen(
             modifier = Modifier,
+            onLogInBtnClick = { },
             onSignUpBtnClick = { },
+            onNextBtnClick = { },
             onIdChange = { },
             onPwChange = { },
-            signUpState = SignUpState()
+            logInState = LogInState()
         )
     }
 }
