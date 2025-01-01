@@ -44,7 +44,7 @@ fun OnboardingTextField(
     TextField(
         modifier = modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(8.dp))
+            .clip(RoundedCornerShape(4.dp))
             .background(Color.DarkGray)
             .padding(horizontal = 10.dp),
         value = value,

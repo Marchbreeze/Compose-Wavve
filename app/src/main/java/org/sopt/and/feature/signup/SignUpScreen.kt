@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -37,7 +36,6 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.flowWithLifecycle
 import org.sopt.and.R
-import org.sopt.and.designsystem.component.appbar.OnboardingTopBar
 import org.sopt.and.designsystem.component.text.WhiteGrayText
 import org.sopt.and.designsystem.component.textfield.OnboardingTextField
 import org.sopt.and.designsystem.theme.ANDANDROIDTheme
@@ -58,7 +56,7 @@ fun SignUpRoute(
         viewModel.signUpSideEffect.flowWithLifecycle(lifecycleOwner.lifecycle)
             .collect { sideEffect ->
                 when (sideEffect) {
-                    is SignUpSideEffect.NavigateToLogin -> {
+                    is SignUpSideEffect.NavigateToLogIn -> {
                         navigateToLogIn(signUpState.id, signUpState.password)
                     }
 

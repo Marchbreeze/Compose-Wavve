@@ -18,6 +18,10 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
 
     private val _signUpSideEffect = MutableSharedFlow<SignUpSideEffect>()
     val signUpSideEffect = _signUpSideEffect.asSharedFlow()
+    
+    fun updateId(id: String) = _signUpState.update { it.copy(id = id) }
+
+    fun updatePassword(password: String) = _signUpState.update { it.copy(password = password) }
 
     fun postToSignUp() {
         viewModelScope.launch {
@@ -26,7 +30,7 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
             } else if (!isPasswordValid(_signUpState.value.password)) {
                 _signUpSideEffect.emit(SignUpSideEffect.SignUpError(false))
             } else {
-                _signUpSideEffect.emit(SignUpSideEffect.NavigateToLogin)
+                _signUpSideEffect.emit(SignUpSideEffect.NavigateToLogIn)
             }
         }
     }
@@ -42,10 +46,6 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
         ).count { it }
         return password.length in 8..20 && (categoriesCount >= 3)
     }
-
-    fun updateId(id: String) = _signUpState.update { it.copy(id = id) }
-
-    fun updatePassword(password: String) = _signUpState.update { it.copy(password = password) }
 
     companion object {
         private const val EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@(.+)$"
