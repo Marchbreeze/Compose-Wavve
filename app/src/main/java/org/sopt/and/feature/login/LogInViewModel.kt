@@ -28,9 +28,9 @@ class LogInViewModel @Inject constructor() : ViewModel() {
 
     fun postToLogIn() {
         viewModelScope.launch {
-            if (_logInState.value.id != signedId) {
+            if (_logInState.value.id != signedId || signedId.isEmpty()) {
                 _logInSideEffect.emit(LogInSideEffect.LogInError(true))
-            } else if (_logInState.value.password != signedPassword) {
+            } else if (_logInState.value.password != signedPassword || signedPassword.isEmpty()) {
                 _logInSideEffect.emit(LogInSideEffect.LogInError(false))
             } else {
                 _logInSideEffect.emit(LogInSideEffect.NavigateToMain)

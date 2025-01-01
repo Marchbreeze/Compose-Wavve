@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.and.designsystem.component.appbar.OnboardingTopBar
 import org.sopt.and.designsystem.theme.ANDANDROIDTheme
+import org.sopt.and.feature.main.MainActivity
 import org.sopt.and.feature.signup.SignUpActivity
 
 @AndroidEntryPoint
@@ -60,7 +61,11 @@ class LogInActivity : ComponentActivity() {
     }
 
     private fun navigateToMain(id: String) {
-        // TODO
+        Intent(this, MainActivity::class.java).apply {
+            putExtra(EXTRA_ID, id)
+            startActivity(this)
+        }
+        finish()
     }
 
     companion object {
