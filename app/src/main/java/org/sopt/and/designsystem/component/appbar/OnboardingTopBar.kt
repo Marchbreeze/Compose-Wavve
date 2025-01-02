@@ -21,8 +21,8 @@ import org.sopt.and.designsystem.theme.ANDANDROIDTheme
 fun OnboardingTopBar(
     modifier: Modifier = Modifier,
     title: String = "",
-    onBackClick: () -> Unit = {},
     showBackBtn: Boolean = false,
+    onBackClick: () -> Unit = {},
 ) {
     CenterAlignedTopAppBar(
         modifier = modifier.fillMaxWidth(),

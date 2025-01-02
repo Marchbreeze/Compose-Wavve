@@ -27,8 +27,8 @@ class SignUpActivity : ComponentActivity() {
                     topBar = {
                         OnboardingTopBar(
                             title = "회원가입",
-                            onBackClick = { finish() },
-                            showBackBtn = true
+                            showBackBtn = true,
+                            onBackClick = ::finish,
                         )
                     }
                 ) { innerPadding ->
