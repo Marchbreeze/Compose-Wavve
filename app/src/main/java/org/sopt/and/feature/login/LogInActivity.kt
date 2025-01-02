@@ -47,9 +47,9 @@ class LogInActivity : ComponentActivity() {
                     }
                 ) { innerPadding ->
                     LogInRoute(
-                        modifier = Modifier.padding(paddingValues = innerPadding),
                         navigateToSignUp = ::navigateToSignUp,
-                        navigateToMain = ::navigateToMain
+                        navigateToMain = ::navigateToMain,
+                        modifier = Modifier.padding(paddingValues = innerPadding),
                     )
                 }
             }

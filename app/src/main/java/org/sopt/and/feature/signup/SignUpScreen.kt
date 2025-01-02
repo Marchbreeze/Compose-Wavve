@@ -2,9 +2,6 @@ package org.sopt.and.feature.signup
 
 import android.widget.Toast
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -17,14 +14,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -36,21 +31,22 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.flowWithLifecycle
 import org.sopt.and.R
+import org.sopt.and.designsystem.component.modifier.clearFocus
+import org.sopt.and.designsystem.component.modifier.noRippleClickable
 import org.sopt.and.designsystem.component.text.WhiteGrayText
 import org.sopt.and.designsystem.component.textfield.OnboardingTextField
 import org.sopt.and.designsystem.theme.ANDANDROIDTheme
 
 @Composable
 fun SignUpRoute(
-    modifier: Modifier = Modifier,
     navigateToLogIn: (String, String) -> Unit,
+    modifier: Modifier = Modifier,
     viewModel: SignUpViewModel = hiltViewModel(),
 ) {
     val signUpState by viewModel.signUpState.collectAsStateWithLifecycle()
 
     val lifecycleOwner = LocalLifecycleOwner.current
     val context = LocalContext.current
-    val focusManager = LocalFocusManager.current
 
     LaunchedEffect(viewModel.signUpSideEffect, lifecycleOwner) {
         viewModel.signUpSideEffect.flowWithLifecycle(lifecycleOwner.lifecycle)
@@ -72,31 +68,27 @@ fun SignUpRoute(
     }
 
     SignUpScreen(
-        modifier = modifier
-            .pointerInput(Unit) {
-                detectTapGestures(onTap = {
-                    focusManager.clearFocus()
-                })
-            },
+        signUpState = signUpState,
         onSignUpBtnClick = viewModel::postToSignUp,
         onIdChange = viewModel::updateId,
         onPwChange = viewModel::updatePassword,
-        signUpState = signUpState
+        modifier = modifier
     )
 }
 
 @Composable
 fun SignUpScreen(
-    modifier: Modifier = Modifier,
+    signUpState: SignUpState,
     onSignUpBtnClick: () -> Unit,
     onIdChange: (String) -> Unit,
     onPwChange: (String) -> Unit,
-    signUpState: SignUpState,
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.Black),
+            .background(Color.Black)
+            .clearFocus(),
     ) {
         WhiteGrayText(
             modifier = Modifier.padding(
@@ -137,7 +129,7 @@ fun SignUpScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
-                painter = painterResource(id = R.drawable.ic_info),
+                imageVector = ImageVector.vectorResource(id = R.drawable.ic_info),
                 contentDescription = "",
                 tint = Color.Gray
             )
@@ -166,7 +158,7 @@ fun SignUpScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
-                painter = painterResource(id = R.drawable.ic_info),
+                imageVector = ImageVector.vectorResource(id = R.drawable.ic_info),
                 contentDescription = "",
                 tint = Color.Gray
             )
@@ -188,12 +180,7 @@ fun SignUpScreen(
                 .background(Color.Gray)
                 .fillMaxWidth()
                 .padding(vertical = 14.dp)
-                .clickable(
-                    indication = null,
-                    interactionSource = remember { MutableInteractionSource() }
-                ) {
-                    onSignUpBtnClick()
-                },
+                .noRippleClickable { onSignUpBtnClick() },
             text = "Wavve 회원가입",
             fontSize = 16.sp,
             color = Color.White,
@@ -207,11 +194,10 @@ fun SignUpScreen(
 fun SignUpPreview() {
     ANDANDROIDTheme {
         SignUpScreen(
-            modifier = Modifier,
+            signUpState = SignUpState(),
             onSignUpBtnClick = { },
             onIdChange = { },
             onPwChange = { },
-            signUpState = SignUpState()
         )
     }
 }
