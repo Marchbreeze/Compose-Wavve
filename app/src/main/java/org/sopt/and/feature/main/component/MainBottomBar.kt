@@ -21,40 +21,43 @@ import org.sopt.and.feature.main.navigation.MainTab
 
 @Composable
 fun MainBottomBar(
+    isVisible: Boolean,
     tabs: List<MainTab>,
     currentTab: MainTab?,
     onTabSelected: (MainTab) -> Unit,
 ) {
-    NavigationBar(containerColor = Color.Black) {
-        tabs.forEach { itemType ->
-            NavigationBarItem(
-                selected = currentTab == itemType,
-                onClick = {
-                    onTabSelected(itemType)
-                },
-                icon = {
-                    Icon(
-                        imageVector = ImageVector.vectorResource(id = (itemType.icon)),
-                        contentDescription = itemType.contentDescription,
-                        modifier = Modifier
-                            .size(24.dp)
-                            .clip(CircleShape)
+    if (isVisible) {
+        NavigationBar(containerColor = Color.Black) {
+            tabs.forEach { itemType ->
+                NavigationBarItem(
+                    selected = currentTab == itemType,
+                    onClick = {
+                        onTabSelected(itemType)
+                    },
+                    icon = {
+                        Icon(
+                            imageVector = ImageVector.vectorResource(id = (itemType.icon)),
+                            contentDescription = itemType.contentDescription,
+                            modifier = Modifier
+                                .size(24.dp)
+                                .clip(CircleShape)
+                        )
+                    },
+                    label = {
+                        Text(
+                            text = itemType.contentDescription,
+                            fontSize = 9.sp
+                        )
+                    },
+                    colors = NavigationBarItemDefaults.colors(
+                        selectedIconColor = Color.White,
+                        selectedTextColor = Color.White,
+                        unselectedIconColor = Color.LightGray,
+                        unselectedTextColor = Color.LightGray,
+                        indicatorColor = Color.Transparent
                     )
-                },
-                label = {
-                    Text(
-                        text = itemType.contentDescription,
-                        fontSize = 9.sp
-                    )
-                },
-                colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = Color.White,
-                    selectedTextColor = Color.White,
-                    unselectedIconColor = Color.LightGray,
-                    unselectedTextColor = Color.LightGray,
-                    indicatorColor = Color.Transparent
                 )
-            )
+            }
         }
     }
 }
@@ -64,6 +67,7 @@ fun MainBottomBar(
 fun MainBottomBarPreview() {
     ANDANDROIDTheme {
         MainBottomBar(
+            isVisible = true,
             tabs = MainTab.entries.toList(),
             currentTab = MainTab.HOME,
             onTabSelected = {}

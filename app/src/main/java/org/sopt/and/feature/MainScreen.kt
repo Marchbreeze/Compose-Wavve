@@ -38,7 +38,6 @@ fun MainScreen(
                 )
             }
         },
-        modifier = Modifier.fillMaxSize(),
         topBar = {
             OnboardingTopBar(
                 title = "Wavve",
@@ -46,6 +45,7 @@ fun MainScreen(
         },
         bottomBar = {
             MainBottomBar(
+                isVisible = navigator.shouldShowBottomBar(),
                 tabs = MainTab.entries.toList(),
                 currentTab = navigator.currentTab,
                 onTabSelected = navigator::navigate

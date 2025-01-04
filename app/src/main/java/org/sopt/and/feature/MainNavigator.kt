@@ -2,6 +2,7 @@ package org.sopt.and.feature
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavDestination
+import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.navOptions
@@ -20,13 +21,13 @@ class MainNavigator(
     val startDestination = LogIn("", "")
 
     val currentTab: MainTab?
-        @Composable get() = MainTab.find { route ->
-            currentDestination?.route == route.toString()
+        @Composable get() = MainTab.find { tab ->
+            currentDestination?.hasRoute(tab::class) == true
         }
 
     @Composable
-    fun showBottomBar(): Boolean = MainTab.contains { route ->
-        currentDestination?.route == route.toString()
+    fun shouldShowBottomBar() = MainTab.contains {
+        currentDestination?.hasRoute(it::class) == true
     }
 
     fun navigate(tab: MainTab) {
