@@ -26,7 +26,7 @@
             android:name=".feature.onboarding.signup.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".feature.main.MainActivity"
+            android:name=".feature.MainActivity"
             android:exported="false" />
     </application>
 

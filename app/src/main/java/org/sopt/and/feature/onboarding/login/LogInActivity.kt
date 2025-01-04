@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.and.designsystem.component.appbar.OnboardingTopBar
 import org.sopt.and.designsystem.theme.ANDANDROIDTheme
-import org.sopt.and.feature.main.MainActivity
+import org.sopt.and.feature.MainActivity
 import org.sopt.and.feature.onboarding.signup.SignUpActivity
 
 @AndroidEntryPoint

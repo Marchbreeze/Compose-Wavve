@@ -1,4 +1,4 @@
-package org.sopt.and.feature.main
+package org.sopt.and.feature
 
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
@@ -14,17 +14,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
 import org.sopt.and.designsystem.component.appbar.OnboardingTopBar
 import org.sopt.and.designsystem.theme.ANDANDROIDTheme
 import org.sopt.and.feature.main.component.MainBottomBar
-import org.sopt.and.feature.main.navigation.MainNavigator
 import org.sopt.and.feature.main.navigation.MainTab
 import org.sopt.and.feature.main.navigation.mainNavGraph
-import org.sopt.and.feature.main.navigation.rememberMainNavigator
+import org.sopt.and.feature.onboarding.navigation.onboardingNavGraph
 
 @Composable
 fun MainScreen(
-    navigator: MainNavigator = rememberMainNavigator(),
+    navigator: MainNavigator = MainNavigator(rememberNavController()),
 ) {
     val snackBarHostState = remember { SnackbarHostState() }
 
@@ -66,6 +66,7 @@ fun MainScreen(
                     popExitTransition = { ExitTransition.None }
                 ) {
                     mainNavGraph()
+                    onboardingNavGraph(navigator.navController)
                 }
             }
         }

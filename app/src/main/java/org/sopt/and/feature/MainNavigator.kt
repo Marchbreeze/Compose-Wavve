@@ -1,16 +1,15 @@
-package org.sopt.and.feature.main.navigation
+package org.sopt.and.feature
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.navigation.NavDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
-import org.sopt.and.feature.main.home.navigation.Home
 import org.sopt.and.feature.main.home.navigation.navigateToHome
+import org.sopt.and.feature.main.navigation.MainTab
 import org.sopt.and.feature.main.profile.navigation.navigateToProfile
 import org.sopt.and.feature.main.save.navigation.navigateToSave
+import org.sopt.and.feature.onboarding.login.navigation.LogIn
 
 class MainNavigator(
     val navController: NavHostController,
@@ -18,7 +17,7 @@ class MainNavigator(
     private val currentDestination: NavDestination?
         @Composable get() = navController.currentBackStackEntryAsState().value?.destination
 
-    val startDestination = Home
+    val startDestination = LogIn("", "")
 
     val currentTab: MainTab?
         @Composable get() = MainTab.find { route ->
@@ -48,11 +47,4 @@ class MainNavigator(
             MainTab.PROFILE -> navController.navigateToProfile(navOptions)
         }
     }
-}
-
-@Composable
-internal fun rememberMainNavigator(
-    navController: NavHostController = rememberNavController(),
-): MainNavigator = remember(navController) {
-    MainNavigator(navController)
 }
