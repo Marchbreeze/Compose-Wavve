@@ -6,12 +6,11 @@ import kotlinx.serialization.Serializable
 import org.sopt.and.navigation.Route
 
 fun NavController.navigateToLogIn(
+    id: String,
+    password: String,
     navOptions: NavOptions? = null,
 ) {
-    navigate(
-        LogIn,
-        navOptions
-    )
+    navigate(LogIn(id, password), navOptions)
 }
 
 @Serializable
