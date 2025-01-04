@@ -1,4 +1,4 @@
-package org.sopt.and.feature.signup
+package org.sopt.and.feature.onboarding.signup
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,8 +12,8 @@ import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.and.designsystem.component.appbar.OnboardingTopBar
 import org.sopt.and.designsystem.theme.ANDANDROIDTheme
-import org.sopt.and.feature.login.LogInActivity.Companion.EXTRA_ID
-import org.sopt.and.feature.login.LogInActivity.Companion.EXTRA_PASSWORD
+import org.sopt.and.feature.onboarding.login.LogInActivity.Companion.EXTRA_ID
+import org.sopt.and.feature.onboarding.login.LogInActivity.Companion.EXTRA_PASSWORD
 
 @AndroidEntryPoint
 class SignUpActivity : ComponentActivity() {

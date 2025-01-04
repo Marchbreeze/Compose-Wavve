@@ -1,4 +1,4 @@
-package org.sopt.and.designsystem.component.text
+package org.sopt.and.feature.onboarding.component
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

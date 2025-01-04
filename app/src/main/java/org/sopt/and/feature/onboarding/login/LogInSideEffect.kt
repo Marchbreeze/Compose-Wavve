@@ -1,4 +1,4 @@
-package org.sopt.and.feature.login
+package org.sopt.and.feature.onboarding.login
 
 sealed class LogInSideEffect {
     data class LogInError(val isIdError: Boolean) : LogInSideEffect()

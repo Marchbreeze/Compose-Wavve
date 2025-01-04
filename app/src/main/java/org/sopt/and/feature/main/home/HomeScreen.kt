@@ -1,4 +1,4 @@
-package org.sopt.and.feature.profile
+package org.sopt.and.feature.main.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
@@ -6,19 +6,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun ProfileRoute(
+fun HomeRoute(
     modifier: Modifier = Modifier
 ) {
 
-    ProfileScreen()
+    HomeScreen()
 }
 
 
 @Composable
-fun ProfileScreen(
+fun HomeScreen(
     modifier: Modifier = Modifier,
 ) {
     Column {
-        Text("Profile")
+        Text("Home")
     }
 }

@@ -1,4 +1,4 @@
-package org.sopt.and.feature.save
+package org.sopt.and.feature.main.profile
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
@@ -6,19 +6,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun SaveRoute(
+fun ProfileRoute(
     modifier: Modifier = Modifier
 ) {
 
-    SaveScreen()
+    ProfileScreen()
 }
 
 
 @Composable
-fun SaveScreen(
+fun ProfileScreen(
     modifier: Modifier = Modifier,
 ) {
     Column {
-        Text("Save")
+        Text("Profile")
     }
 }

@@ -3,9 +3,9 @@ package org.sopt.and.feature.main.navigation
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.Composable
 import org.sopt.and.R
-import org.sopt.and.feature.home.navigation.Home
-import org.sopt.and.feature.profile.navigation.Profile
-import org.sopt.and.feature.save.navigation.Save
+import org.sopt.and.feature.main.home.navigation.Home
+import org.sopt.and.feature.main.profile.navigation.Profile
+import org.sopt.and.feature.main.save.navigation.Save
 import org.sopt.and.navigation.MainTabRoute
 import org.sopt.and.navigation.Route
 

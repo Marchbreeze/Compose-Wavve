@@ -1,4 +1,4 @@
-package org.sopt.and.feature.login
+package org.sopt.and.feature.onboarding.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

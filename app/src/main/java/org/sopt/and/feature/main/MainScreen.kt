@@ -45,11 +45,11 @@ fun MainScreen(
             )
         },
         bottomBar = {
-                MainBottomBar(
-                    tabs = MainTab.entries.toList(),
-                    currentTab = navigator.currentTab,
-                    onTabSelected = navigator::navigate
-                )
+            MainBottomBar(
+                tabs = MainTab.entries.toList(),
+                currentTab = navigator.currentTab,
+                onTabSelected = navigator::navigate
+            )
         },
         content = { paddingValue ->
             Column(
@@ -58,20 +58,12 @@ fun MainScreen(
                     .padding(paddingValue)
             ) {
                 NavHost(
-                    enterTransition = {
-                        EnterTransition.None
-                    },
-                    exitTransition = {
-                        ExitTransition.None
-                    },
-                    popEnterTransition = {
-                        EnterTransition.None
-                    },
-                    popExitTransition = {
-                        ExitTransition.None
-                    },
                     navController = navigator.navController,
                     startDestination = navigator.startDestination,
+                    enterTransition = { EnterTransition.None },
+                    exitTransition = { ExitTransition.None },
+                    popEnterTransition = { EnterTransition.None },
+                    popExitTransition = { ExitTransition.None }
                 ) {
                     mainNavGraph()
                 }

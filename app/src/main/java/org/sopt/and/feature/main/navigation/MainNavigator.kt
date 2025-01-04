@@ -7,10 +7,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
-import org.sopt.and.feature.home.navigation.Home
-import org.sopt.and.feature.home.navigation.navigateToHome
-import org.sopt.and.feature.profile.navigation.navigateToProfile
-import org.sopt.and.feature.save.navigation.navigateToSave
+import org.sopt.and.feature.main.home.navigation.Home
+import org.sopt.and.feature.main.home.navigation.navigateToHome
+import org.sopt.and.feature.main.profile.navigation.navigateToProfile
+import org.sopt.and.feature.main.save.navigation.navigateToSave
 
 class MainNavigator(
     val navController: NavHostController,

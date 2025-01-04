@@ -1,4 +1,4 @@
-package org.sopt.and.feature.login
+package org.sopt.and.feature.onboarding.login
 
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -29,7 +29,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.flowWithLifecycle
 import org.sopt.and.designsystem.component.modifier.clearFocus
 import org.sopt.and.designsystem.component.modifier.noRippleClickable
-import org.sopt.and.designsystem.component.textfield.OnboardingTextField
+import org.sopt.and.feature.onboarding.component.OnboardingTextField
 import org.sopt.and.designsystem.theme.ANDANDROIDTheme
 
 @Composable

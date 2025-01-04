@@ -2,12 +2,12 @@ package org.sopt.and.feature.main.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import org.sopt.and.feature.home.navigation.Home
-import org.sopt.and.feature.home.HomeRoute
-import org.sopt.and.feature.profile.navigation.Profile
-import org.sopt.and.feature.profile.ProfileRoute
-import org.sopt.and.feature.save.navigation.Save
-import org.sopt.and.feature.save.SaveRoute
+import org.sopt.and.feature.main.home.navigation.Home
+import org.sopt.and.feature.main.home.HomeRoute
+import org.sopt.and.feature.main.profile.navigation.Profile
+import org.sopt.and.feature.main.profile.ProfileRoute
+import org.sopt.and.feature.main.save.navigation.Save
+import org.sopt.and.feature.main.save.SaveRoute
 
 fun NavGraphBuilder.mainNavGraph() {
     composable<Home> {

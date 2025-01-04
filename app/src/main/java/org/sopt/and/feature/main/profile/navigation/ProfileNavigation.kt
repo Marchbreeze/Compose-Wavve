@@ -1,18 +1,18 @@
-package org.sopt.and.feature.save.navigation
+package org.sopt.and.feature.main.profile.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import kotlinx.serialization.Serializable
 import org.sopt.and.navigation.MainTabRoute
 
-fun NavController.navigateToSave(
+fun NavController.navigateToProfile(
     navOptions: NavOptions? = null,
 ) {
     navigate(
-        Save,
+        Profile,
         navOptions
     )
 }
 
 @Serializable
-data object Save : MainTabRoute
+data object Profile : MainTabRoute
