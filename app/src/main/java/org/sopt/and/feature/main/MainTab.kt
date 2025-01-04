@@ -3,6 +3,9 @@ package org.sopt.and.feature.main
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.Composable
 import org.sopt.and.R
+import org.sopt.and.feature.home.Home
+import org.sopt.and.feature.profile.Profile
+import org.sopt.and.feature.save.Save
 import org.sopt.and.navigation.MainTabRoute
 import org.sopt.and.navigation.Route
 
@@ -26,7 +29,7 @@ enum class MainTab(
         icon = R.drawable.ic_profile,
         contentDescription = "profile",
         route = Profile
-    )
+    );
 
     companion object {
         @Composable

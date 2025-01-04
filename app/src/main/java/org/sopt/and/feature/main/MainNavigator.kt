@@ -7,6 +7,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
+import org.sopt.and.feature.home.Home
+import org.sopt.and.feature.home.navigateToHome
+import org.sopt.and.feature.profile.navigateToProfile
+import org.sopt.and.feature.save.navigateToSave
 
 class MainNavigator(
     val navController: NavHostController,
@@ -14,10 +18,7 @@ class MainNavigator(
     private val currentDestination: NavDestination?
         @Composable get() = navController.currentBackStackEntryAsState().value?.destination
 
-    val startDestination = LogIn(
-        email = "",
-        password = "",
-    )
+    val startDestination = Home
 
     val currentTab: MainTab?
         @Composable get() = MainTab.find { route ->
