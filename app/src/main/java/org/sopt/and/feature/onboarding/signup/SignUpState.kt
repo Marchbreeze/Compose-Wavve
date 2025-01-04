@@ -1,4 +1,4 @@
-package org.sopt.and.feature.signup
+package org.sopt.and.feature.onboarding.signup
 
 data class SignUpState(
     val id: String = "",

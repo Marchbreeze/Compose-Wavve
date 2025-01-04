@@ -1,4 +1,4 @@
-package org.sopt.and.designsystem.component.textfield
+package org.sopt.and.feature.onboarding.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -6,7 +6,6 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
