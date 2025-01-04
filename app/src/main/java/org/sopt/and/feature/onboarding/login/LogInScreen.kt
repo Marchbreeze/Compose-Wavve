@@ -38,7 +38,6 @@ fun LogInRoute(
     signedPassword: String,
     navigateToSignUp: () -> Unit,
     navigateToMain: () -> Unit,
-    modifier: Modifier = Modifier,
     viewModel: LogInViewModel = hiltViewModel(),
 ) {
     val logInState by viewModel.logInState.collectAsStateWithLifecycle()
@@ -76,7 +75,6 @@ fun LogInRoute(
         onNextBtnClick = viewModel::navigateToMain,
         onIdChange = viewModel::updateId,
         onPwChange = viewModel::updatePassword,
-        modifier = modifier
     )
 }
 
@@ -88,10 +86,9 @@ fun LogInScreen(
     onNextBtnClick: () -> Unit,
     onIdChange: (String) -> Unit,
     onPwChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxSize()
             .background(Color.Black)
             .clearFocus(),

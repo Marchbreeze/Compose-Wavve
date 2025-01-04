@@ -40,7 +40,6 @@ import org.sopt.and.feature.onboarding.component.WhiteGrayText
 @Composable
 fun SignUpRoute(
     navigateToLogIn: (id: String, password: String) -> Unit,
-    modifier: Modifier = Modifier,
     viewModel: SignUpViewModel = hiltViewModel(),
 ) {
     val signUpState by viewModel.signUpState.collectAsStateWithLifecycle()
@@ -72,7 +71,6 @@ fun SignUpRoute(
         onSignUpBtnClick = viewModel::postToSignUp,
         onIdChange = viewModel::updateId,
         onPwChange = viewModel::updatePassword,
-        modifier = modifier
     )
 }
 
@@ -82,10 +80,9 @@ fun SignUpScreen(
     onSignUpBtnClick: () -> Unit,
     onIdChange: (String) -> Unit,
     onPwChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxSize()
             .background(Color.Black)
             .clearFocus(),

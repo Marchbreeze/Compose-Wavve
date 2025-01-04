@@ -8,16 +8,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
 @Composable
-fun ProfileRoute(
-    modifier: Modifier = Modifier
-) {
-
+fun ProfileRoute() {
     ProfileScreen()
 }
 
 
 @Composable
-fun ProfileScreen(
+internal fun ProfileScreen(
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier.background(Color.LightGray)) {

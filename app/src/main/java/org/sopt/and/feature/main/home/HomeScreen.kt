@@ -8,16 +8,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
 @Composable
-fun HomeRoute(
-    modifier: Modifier = Modifier
-) {
-
+fun HomeRoute() {
     HomeScreen()
 }
 
 
 @Composable
-fun HomeScreen(
+internal fun HomeScreen(
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier.background(Color.Gray)) {

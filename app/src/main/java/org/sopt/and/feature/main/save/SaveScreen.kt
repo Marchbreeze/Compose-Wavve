@@ -8,16 +8,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
 @Composable
-fun SaveRoute(
-    modifier: Modifier = Modifier
-) {
-
+fun SaveRoute() {
     SaveScreen()
 }
 
 
 @Composable
-fun SaveScreen(
+internal fun SaveScreen(
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier.background(Color.DarkGray)) {

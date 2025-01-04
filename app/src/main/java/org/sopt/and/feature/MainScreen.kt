@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import kotlinx.collections.immutable.toPersistentList
 import org.sopt.and.designsystem.component.appbar.OnboardingTopBar
 import org.sopt.and.designsystem.theme.ANDANDROIDTheme
 import org.sopt.and.feature.main.component.MainBottomBar
@@ -46,7 +47,7 @@ fun MainScreen(
         bottomBar = {
             MainBottomBar(
                 isVisible = navigator.shouldShowBottomBar(),
-                tabs = MainTab.entries.toList(),
+                tabs = MainTab.entries.toPersistentList(),
                 currentTab = navigator.currentTab,
                 onTabSelected = navigator::navigate
             )
