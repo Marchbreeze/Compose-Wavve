@@ -1,5 +1,8 @@
 package org.sopt.and.feature.main
 
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -13,6 +16,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import org.sopt.and.designsystem.component.appbar.OnboardingTopBar
 import org.sopt.and.designsystem.theme.ANDANDROIDTheme
+import org.sopt.and.feature.main.component.MainBottomBar
+import org.sopt.and.feature.main.navigation.MainNavigator
+import org.sopt.and.feature.main.navigation.MainTab
+import org.sopt.and.feature.main.navigation.mainNavGraph
+import org.sopt.and.feature.main.navigation.rememberMainNavigator
 
 @Composable
 fun MainScreen(
@@ -36,22 +44,37 @@ fun MainScreen(
                 title = "Wavve",
             )
         },
-//        bottomBar = {
-//            if (navigator.showBottomBar()) {
-//                MainBottomBar(
-//                    tabs = MainTab.entries.toList(),
-//                    currentTab = navigator.currentTab,
-//                    onTabSelected = navigator::navigate
-//                )
-//            }
-//        },
+        bottomBar = {
+                MainBottomBar(
+                    tabs = MainTab.entries.toList(),
+                    currentTab = navigator.currentTab,
+                    onTabSelected = navigator::navigate
+                )
+        },
         content = { paddingValue ->
-            NavHost(
-                modifier = Modifier.padding(paddingValue),
-                navController = navigator.navController,
-                startDestination = navigator.startDestination,
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValue)
             ) {
-                mainNavGraph()
+                NavHost(
+                    enterTransition = {
+                        EnterTransition.None
+                    },
+                    exitTransition = {
+                        ExitTransition.None
+                    },
+                    popEnterTransition = {
+                        EnterTransition.None
+                    },
+                    popExitTransition = {
+                        ExitTransition.None
+                    },
+                    navController = navigator.navController,
+                    startDestination = navigator.startDestination,
+                ) {
+                    mainNavGraph()
+                }
             }
         }
     )

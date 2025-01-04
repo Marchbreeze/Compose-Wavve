@@ -1,18 +1,18 @@
-package org.sopt.and.feature.home
+package org.sopt.and.feature.profile.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import kotlinx.serialization.Serializable
 import org.sopt.and.navigation.MainTabRoute
 
-fun NavController.navigateToHome(
+fun NavController.navigateToProfile(
     navOptions: NavOptions? = null,
 ) {
     navigate(
-        Home,
+        Profile,
         navOptions
     )
 }
 
 @Serializable
-data object Home : MainTabRoute
+data object Profile : MainTabRoute
