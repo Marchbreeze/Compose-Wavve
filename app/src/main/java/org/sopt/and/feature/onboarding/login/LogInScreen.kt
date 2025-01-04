@@ -29,13 +29,15 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.flowWithLifecycle
 import org.sopt.and.designsystem.component.modifier.clearFocus
 import org.sopt.and.designsystem.component.modifier.noRippleClickable
-import org.sopt.and.feature.onboarding.component.OnboardingTextField
 import org.sopt.and.designsystem.theme.ANDANDROIDTheme
+import org.sopt.and.feature.onboarding.component.OnboardingTextField
 
 @Composable
 fun LogInRoute(
+    signedId: String,
+    signedPassword: String,
     navigateToSignUp: () -> Unit,
-    navigateToMain: (String) -> Unit,
+    navigateToMain: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: LogInViewModel = hiltViewModel(),
 ) {
@@ -53,7 +55,7 @@ fun LogInRoute(
                     }
 
                     is LogInSideEffect.NavigateToMain -> {
-                        navigateToMain(logInState.id)
+                        navigateToMain()
                     }
 
                     is LogInSideEffect.LogInError -> {
@@ -69,7 +71,7 @@ fun LogInRoute(
 
     LogInScreen(
         logInState = logInState,
-        onLogInBtnClick = viewModel::postToLogIn,
+        onLogInBtnClick = { viewModel.postToLogIn(signedId, signedPassword) },
         onSignUpBtnClick = viewModel::navigateToSignUp,
         onNextBtnClick = viewModel::navigateToMain,
         onIdChange = viewModel::updateId,

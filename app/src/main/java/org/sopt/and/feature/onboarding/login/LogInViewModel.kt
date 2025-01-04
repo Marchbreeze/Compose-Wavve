@@ -19,14 +19,11 @@ class LogInViewModel @Inject constructor() : ViewModel() {
     private val _logInSideEffect = MutableSharedFlow<LogInSideEffect>()
     val logInSideEffect = _logInSideEffect.asSharedFlow()
 
-    var signedId = ""
-    var signedPassword = ""
-
     fun updateId(id: String) = _logInState.update { it.copy(id = id) }
 
     fun updatePassword(password: String) = _logInState.update { it.copy(password = password) }
 
-    fun postToLogIn() {
+    fun postToLogIn(signedId: String, signedPassword: String) {
         viewModelScope.launch {
             if (_logInState.value.id != signedId || signedId.isEmpty()) {
                 _logInSideEffect.emit(LogInSideEffect.LogInError(true))

@@ -13,7 +13,6 @@ enum class MainTab(
     @DrawableRes val icon: Int,
     val contentDescription: String,
     val route: MainTabRoute,
-    val showBottomSheet: Boolean = true,
 ) {
     HOME(
         icon = R.drawable.ic_home,

@@ -33,13 +33,13 @@ import androidx.lifecycle.flowWithLifecycle
 import org.sopt.and.R
 import org.sopt.and.designsystem.component.modifier.clearFocus
 import org.sopt.and.designsystem.component.modifier.noRippleClickable
-import org.sopt.and.feature.onboarding.component.WhiteGrayText
-import org.sopt.and.feature.onboarding.component.OnboardingTextField
 import org.sopt.and.designsystem.theme.ANDANDROIDTheme
+import org.sopt.and.feature.onboarding.component.OnboardingTextField
+import org.sopt.and.feature.onboarding.component.WhiteGrayText
 
 @Composable
 fun SignUpRoute(
-    navigateToLogIn: (String, String) -> Unit,
+    navigateToLogIn: (id: String, password: String) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: SignUpViewModel = hiltViewModel(),
 ) {
